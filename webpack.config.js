@@ -16,14 +16,14 @@ const target = require('yargs').argv.target;
 const targetPort = require('yargs').argv.targetPort;
 
 const UglifyPlugin = webpack.optimize.UglifyJsPlugin;
-const CommonsChunkPlugin =  webpack.optimize.CommonsChunkPlugin;
+const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const DedupePlugin = webpack.optimize.DedupePlugin;
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackOnBuildPlugin = require('on-build-webpack');
- const ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
+const ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
 
 const nodeModulesDir = path.resolve(__dirname, '../node_modules');
 
@@ -43,92 +43,92 @@ let localOwaFolder;
 let devtool;
 
 var getConfig = function () {
-	  var config;
+    var config;
 
-	  try {
-	    // look for config file
-	    config = require('./config.json');
-	  } catch (err) {
-	    // create file with defaults if not found
-	    config = {
-	      'LOCAL_OWA_FOLDER': '/Users/anatoleabe/openmrs/openmrs-platform/owa/',
-	      'APP_ENTRY_POINT': 'http://localhost:8080/openmrs/owa/openmrssavicsgmao/index.html'
-	    };
+    try {
+        // look for config file
+        config = require('./config.json');
+    } catch (err) {
+        // create file with defaults if not found
+        config = {
+            'LOCAL_OWA_FOLDER': '/Users/anatoleabe/openmrs/openmrs-platform/owa/',
+            'APP_ENTRY_POINT': 'http://172.16.152.130:8080/openmrs/owa/openmrssavicsgmao/index.html'
+        };
 
-	    fs.writeFile('config.json', JSON.stringify(config));
+        fs.writeFile('config.json', JSON.stringify(config));
 
-	  } finally {
-	    return config;
-	  };
-	}
+    } finally {
+        return config;
+    }
+    ;
+}
 var config = getConfig();
 
 var resolveBrowserSyncTarget = function () {
-  if (targetPort != null && targetPort != 'null') {
-    return config.APP_ENTRY_POINT.substr(0, 'http://localhost:'.length)
-      + targetPort
-      + config.APP_ENTRY_POINT.substr('http://localhost:'.length + targetPort.toString().length, config.APP_ENTRY_POINT.length);
-  }
-  else {
-    return config.APP_ENTRY_POINT
-  }
+    if (targetPort != null && targetPort != 'null') {
+        return config.APP_ENTRY_POINT.substr(0, 'http://localhost:'.length)
+                + targetPort
+                + config.APP_ENTRY_POINT.substr('http://localhost:'.length + targetPort.toString().length, config.APP_ENTRY_POINT.length);
+    } else {
+        return config.APP_ENTRY_POINT
+    }
 };
 var browserSyncTarget = resolveBrowserSyncTarget();
 
 /** Minify for production */
 if (env === 'production') {
- plugins.push(new ngAnnotatePlugin());
-	  plugins.push(new UglifyPlugin({
-	    output: {
-	      comments: false,
-	    },
-	    minimize: true,
-	    sourceMap: false,
-	    compress: {
-	        warnings: false
-	    }
-	  }));
-	  plugins.push(new DedupePlugin());
-	  outputFile = `${outputFile}.min.[chunkhash].js`;
-	  vendorOutputFile = "vendor.bundle.[chunkhash].js";
-	  outputPath = `${__dirname}/dist/`;
-	  plugins.push(new WebpackOnBuildPlugin(function(stats){
-      //create zip file
-      var archiver = require('archiver');
-			var output = fs.createWriteStream(THIS_APP_ID+'.zip');
-			var archive = archiver('zip');
+    plugins.push(new ngAnnotatePlugin());
+    plugins.push(new UglifyPlugin({
+        output: {
+            comments: false,
+        },
+        minimize: true,
+        sourceMap: false,
+        compress: {
+            warnings: false
+        }
+    }));
+    plugins.push(new DedupePlugin());
+    outputFile = `${outputFile}.min.[chunkhash].js`;
+    vendorOutputFile = "vendor.bundle.[chunkhash].js";
+    outputPath = `${__dirname}/dist/`;
+    plugins.push(new WebpackOnBuildPlugin(function (stats) {
+        //create zip file
+        var archiver = require('archiver');
+        var output = fs.createWriteStream(THIS_APP_ID + '.zip');
+        var archive = archiver('zip');
 
-			output.on('close', function () {
-			    console.log('distributable has been zipped! size: '+archive.pointer());
-			});
+        output.on('close', function () {
+            console.log('distributable has been zipped! size: ' + archive.pointer());
+        });
 
-			archive.on('error', function(err){
-			    throw err;
-			});
+        archive.on('error', function (err) {
+            throw err;
+        });
 
-			archive.pipe(output);
+        archive.pipe(output);
 
-      archive.directory(`${outputPath}`, '');
+        archive.directory(`${outputPath}`, '');
 
-			archive.finalize();
-		 }))
+        archive.finalize();
+    }))
 
 } else if (env === 'deploy') {
-	  outputFile = `${outputFile}.js`;
-	  vendorOutputFile = "vendor.bundle.js";
-	  outputPath = `${config.LOCAL_OWA_FOLDER}${config.LOCAL_OWA_FOLDER.slice(-1) != '/' ? '/' : ''}${THIS_APP_ID}`;
-	  devtool = 'source-map';
+    outputFile = `${outputFile}.js`;
+    vendorOutputFile = "vendor.bundle.js";
+    outputPath = `${config.LOCAL_OWA_FOLDER}${config.LOCAL_OWA_FOLDER.slice(-1) != '/' ? '/' : ''}${THIS_APP_ID}`;
+    devtool = 'source-map';
 
 } else if (env === 'dev') {
-	  outputFile = `${outputFile}.js`;
-	  vendorOutputFile = "vendor.bundle.js";
-	  outputPath = `${__dirname}/dist/`;
-	  devtool = 'source-map';
+    outputFile = `${outputFile}.js`;
+    vendorOutputFile = "vendor.bundle.js";
+    outputPath = `${__dirname}/dist/`;
+    devtool = 'source-map';
 }
 
 plugins.push(new BrowserSyncPlugin({
     proxy: {
-    	target : browserSyncTarget
+        target: browserSyncTarget
     }
 }));
 
@@ -143,62 +143,72 @@ plugins.push(new HtmlWebpackPlugin({
 }));
 
 plugins.push(new CopyWebpackPlugin([{
-    from: './app/manifest.webapp'
-}]));
+        from: './app/manifest.webapp'
+    }]));
 
 plugins.push(new CopyWebpackPlugin([{
-    from: './app/img/omrs-button.png',
-    to: 'img/omrs-button.png'
-}]));
+        from: './app/img/omrs-button.png',
+        to: 'img/omrs-button.png'
+    }]));
 
- plugins.push(new ngAnnotatePlugin({
-  add: true,
-  map: false
+plugins.push(new ngAnnotatePlugin({
+    add: true,
+    map: false
 }));
 
 var webpackConfig = {
-  quiet: false,
-  entry: {
-	  app : `${__dirname}/app/js/openmrssavicsgmao`,
-	  css: `${__dirname}/app/css/openmrssavicsgmao.css`,
-	  vendor : [
-	        	
-	        	 'angular', 'openmrs-contrib-uicommons', 'angular-animate' 
-                
-	            ]
-  },
-  devtool: devtool,
-  target,
-  output: {
-    path: outputPath,
-    filename: '[name]'+outputFile,
-  },
-  module: {
-    loaders: [{
-	    test: /\.jsx?$/,
-	    loader: 'babel-loader',
-	    exclude: /node_modules/,
-	    query: {
-	        presets: [ 'es2015' ],
-	        cacheDirectory : true
-	    }
-    },{
-	    test: /\.css$/,
-	    loader: 'style-loader!css-loader'
-	}, {
-	    test: /\.(png|jpg|jpeg|gif|svg)$/,
-	    loader: 'url'
-	}, {
-	    test: /\.html$/,
-	    loader: 'html'
-	}],
-  },
-  resolve: {
-    root: path.resolve('./src'),
-    extensions: ['', '.js'],
-  },
-  plugins,
-  externals: nodeModules,
+    quiet: false,
+    entry: {
+        app: `${__dirname}/app/js/openmrssavicsgmao`,
+        css: `${__dirname}/app/css/openmrssavicsgmao.css`,
+        vendor: [
+            'angular', 
+            'angular-route',
+            'openmrs-contrib-uicommons', 
+            'angular-animate'
+        ]
+    },
+    devtool: devtool,
+    target,
+    output: {
+        path: outputPath,
+        filename: '[name]' + outputFile,
+    },
+    module: {
+        loaders: [{
+                test: /\.jsx?$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/,
+                query: {
+                    presets: ['es2015'],
+                    cacheDirectory: true
+                }
+            }, {
+                test: /\.css$/,
+                loader: 'style-loader!css-loader'
+            }, {
+                test: /\.(png|jpg|jpeg|gif|svg)$/,
+                loader: 'url'
+            }, {
+                test: /\.html$/,
+                loader: 'html'
+            }, {
+                test: /\.json$/,
+                loader: 'json'
+
+            },
+            {test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url'},
+            {test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url'},
+            {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url'},
+            {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url'},
+            {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'url'}],
+    },
+    resolve: {
+        root: path.resolve('./src'),
+        extensions: ['', '.js']
+    },
+    plugins,
+    externals: nodeModules,
 };
 
 module.exports = webpackConfig;

@@ -74,9 +74,10 @@
     "build:dev": "npm run clean && webpack --progress --colors --mode=dev --target=web",
     "build:prod": "npm run test && npm run build",
     "build:deploy": "webpack --progress --colors --mode=deploy --target=web",
-    "watch": "webpack --progress --colors --watch --mode=deploy --target=web",
+    "watch": "webpack --progress --colors --watch --mode=deploy --target=web && ./deploy.sh",
     "test": "karma start --singleRun=true",
-    "test:debug": "karma start"
+    "test:debug": "karma start",
+    "deploy:local": "npm run build && ./deploy.sh"
   },
   "keywords": [
     "OpenMRS",
