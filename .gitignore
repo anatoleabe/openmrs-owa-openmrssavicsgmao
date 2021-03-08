@@ -108,3 +108,4 @@ dist
 
 # any zip file
 .zip
+/nbproject/private/

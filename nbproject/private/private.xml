@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/System/Volumes/Data/Users/anatoleabe/Documents/Savics/Bitbucket/OpenMRS/openmrsSavicsGmao/package.json</file>
-            <file>file:/System/Volumes/Data/Users/anatoleabe/Documents/Savics/Bitbucket/OpenMRS/openmrsSavicsGmao/package-lock.json</file>
+            <file>file:/System/Volumes/Data/Users/anatoleabe/Documents/Savics/Bitbucket/OpenMRS/openmrs-owa-openmrssavicsgmao/app/js/main/main.html</file>
+            <file>file:/System/Volumes/Data/Users/anatoleabe/Documents/Savics/Bitbucket/OpenMRS/openmrs-owa-openmrssavicsgmao/app/js/welcome/welcome.js</file>
+            <file>file:/System/Volumes/Data/Users/anatoleabe/Documents/Savics/Bitbucket/OpenMRS/openmrs-owa-openmrssavicsgmao/app/js/home/controllers/patientSearch.controller.js</file>
+            <file>file:/System/Volumes/Data/Users/anatoleabe/Documents/Savics/Bitbucket/OpenMRS/openmrs-owa-openmrssavicsgmao/app/js/main/main.controller.js</file>
+            <file>file:/System/Volumes/Data/Users/anatoleabe/Documents/Savics/Bitbucket/OpenMRS/openmrs-owa-openmrssavicsgmao/app/index.html</file>
+            <file>file:/System/Volumes/Data/Users/anatoleabe/Documents/Savics/Bitbucket/OpenMRS/openmrs-owa-openmrssavicsgmao/app/js/home/home.html</file>
+            <file>file:/System/Volumes/Data/Users/anatoleabe/Documents/Savics/Bitbucket/OpenMRS/openmrs-owa-openmrssavicsgmao/app/js/main/main.js</file>
+            <file>file:/System/Volumes/Data/Users/anatoleabe/Documents/Savics/Bitbucket/OpenMRS/openmrs-owa-openmrssavicsgmao/app/js/home/components/patientSearch.component.js</file>
+            <file>file:/System/Volumes/Data/Users/anatoleabe/Documents/Savics/Bitbucket/OpenMRS/openmrs-owa-openmrssavicsgmao/app/js/welcome/welcome.html</file>
+            <file>file:/System/Volumes/Data/Users/anatoleabe/Documents/Savics/Bitbucket/OpenMRS/openmrs-owa-openmrssavicsgmao/webpack.config.js</file>
+            <file>file:/System/Volumes/Data/Users/anatoleabe/Documents/Savics/Bitbucket/OpenMRS/openmrs-owa-openmrssavicsgmao/app/css/openmrssavicsgmao.css</file>
+            <file>file:/System/Volumes/Data/Users/anatoleabe/Documents/Savics/Bitbucket/OpenMRS/openmrs-owa-openmrssavicsgmao/.gitignore</file>
         </group>
     </open-files>
 </project-private>
